@@ -1,7 +1,9 @@
 package klinutils
 
 import (
+	"crypto/hmac"
 	"crypto/x509"
+	"encoding/hex"
 	"encoding/pem"
 	"fmt"
 	"github.com/theckman/go-flock"

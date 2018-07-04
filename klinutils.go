@@ -2,6 +2,7 @@ package klinutils
 
 import (
 	"crypto/hmac"
+	"crypto/sha1"
 	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"

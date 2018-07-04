@@ -76,6 +76,23 @@ func Matchstring(s, regex string) bool {
 	}
 	return match
 }
+func Waitforqueue(dir string) *flock.Flock {
+	fileLock := flock.NewFlock(dir)
+
+	locked, err := fileLock.TryLock()
+
+	if err != nil {
+		log.Fatal("unable to lock the file at ", dir)
+	}
+
+	if locked {
+		return fileLock
+	} else {
+		fmt.Println("wait 10 seconds there's another process running")
+		time.Sleep(10 * time.Second)
+		return waitforqueue(dir)
+	}
+}
 
 func StringInSlice(a string, list []string) bool {
 	for _, b := range list {
@@ -190,4 +207,28 @@ func Trim(x string) string {
 	rx := x[bra+1:]
 	ket := strings.Index(rx, pattern)
 	return rx[:ket]
+}
+func signBody(secret, body []byte) []byte {
+	computed := hmac.New(sha1.New, secret)
+	computed.Write(body)
+	return []byte(computed.Sum(nil))
+}
+func VerifySignature(secret []byte, signature string, body []byte) bool {
+
+	const signaturePrefix = "sha1="
+	const signatureLength = 45 // len(SignaturePrefix) + len(hex(sha1))
+
+	if len(signature) != signatureLength || !strings.HasPrefix(signature, signaturePrefix) {
+		return false
+	}
+
+	actual := make([]byte, 20)
+	hex.Decode(actual, []byte(signature[5:]))
+
+	return hmac.Equal(signBody(secret, body), actual)
+}
+
+func Isvalidmethod(r *http.Request) bool {
+	methodlist := []string{"GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "CONNECT", "OPTOINS", "TRACE"}
+	return stringInSlice(r.Method, methodlist)
 }

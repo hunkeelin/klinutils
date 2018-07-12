@@ -117,6 +117,10 @@ func Runshell(cmd string, args []string, uid, gid uint32) error {
 	fmt.Printf("%s\n", out)
 	return err
 }
+func Runshellv2(cmd string, args []string) error {
+	err := exec.Command(cmd, args...).Run()
+	return err
+}
 
 func Removestring(s []string, pattern string) []string {
 	var toreturn []string

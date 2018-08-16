@@ -6,6 +6,7 @@ import (
 	"crypto/x509"
 	"encoding/hex"
 	"encoding/pem"
+	"errors"
 	"fmt"
 	"github.com/theckman/go-flock"
 	"io/ioutil"
@@ -93,6 +94,23 @@ func GetHostnameFromCert(path string) string {
 		log.Fatal(err)
 	}
 	return leaf.DNSNames[0]
+}
+func GetHostnameFromCertv2(path string) (string, error) {
+	var s string
+	var err error
+	e, err := ioutil.ReadFile(path)
+	if err != nil {
+		return s, err
+	}
+	block, _ := pem.Decode(e)
+	if block == nil {
+		return s, errors.New("Unable to decode the cert file")
+	}
+	leaf, err := x509.ParseCertificate(block.Bytes)
+	if err != nil {
+		return s, err
+	}
+	return leaf.DNSNames[0], nil
 }
 
 func Matchstring(s, regex string) bool {

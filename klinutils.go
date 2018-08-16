@@ -79,22 +79,23 @@ func Joblist(path string) map[string]string {
 	}
 	return m
 }
-func GetHostnameFromCert(path string) string {
-	e, err := ioutil.ReadFile(path)
-	if err != nil {
-		fmt.Println("can't read file")
-	}
-	block, _ := pem.Decode(e)
-	if block == nil {
-		log.Fatal("fail to parse certifiate pem.")
-	}
-	leaf, err := x509.ParseCertificate(block.Bytes)
-	if err != nil {
-		fmt.Println("can't parse file", path)
-		log.Fatal(err)
-	}
-	return leaf.DNSNames[0]
-}
+
+//func GetHostnameFromCert(path string) string {
+//	e, err := ioutil.ReadFile(path)
+//	if err != nil {
+//		fmt.Println("can't read file")
+//	}
+//	block, _ := pem.Decode(e)
+//	if block == nil {
+//		log.Fatal("fail to parse certifiate pem.")
+//	}
+//	leaf, err := x509.ParseCertificate(block.Bytes)
+//	if err != nil {
+//		fmt.Println("can't parse file", path)
+//		log.Fatal(err)
+//	}
+//	return leaf.DNSNames[0]
+//}
 func GetHostnameFromCertv2(path string) (string, error) {
 	var s string
 	var err error

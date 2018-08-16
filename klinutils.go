@@ -86,7 +86,7 @@ func GetHostnameFromCert(path string) string {
 	}
 	block, _ := pem.Decode(e)
 	if block == nil {
-		log.Fatal("fail to parse certifiate pem")
+		log.Fatal("fail to parse certifiate pem.")
 	}
 	leaf, err := x509.ParseCertificate(block.Bytes)
 	if err != nil {

@@ -28,6 +28,17 @@ func Dowork() {
 	time.Sleep(9 * time.Second)
 	fmt.Println("end")
 }
+func verifySignature(secret []byte, signature string, body []byte) bool {
+	const signaturePrefix = "sha1="
+	const signatureLength = 45 // len(SignaturePrefix) + len(hex(sha1))
+	if len(signature) != signatureLength || !strings.HasPrefix(signature, signaturePrefix) {
+		return false
+	}
+	actual := make([]byte, 20)
+	hex.Decode(actual, []byte(signature[5:]))
+	return hmac.Equal(signBody(secret, body), actual)
+}
+
 func Hostname() string {
 	hostname, err := os.Hostname()
 	if err != nil {

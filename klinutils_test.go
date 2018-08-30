@@ -15,3 +15,6 @@ func TestWget(t *testing.T) {
 	b, _ := Wget(w)
 	fmt.Println(string(b))
 }
+func TestAlgo(t *testing.T) {
+	fmt.Println(Stringtoport("fuck"))
+}

@@ -33,7 +33,7 @@ type reqInfo struct {
 }
 
 // Send a json payload. payload should be a struct where you define your json
-func sendPayload(i *ReqInfo) (*http.Response, error) {
+func sendPayload(i *reqInfo) (*http.Response, error) {
 	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	var resp *http.Response
 	var cert tls.Certificate

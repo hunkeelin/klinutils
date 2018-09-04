@@ -13,7 +13,7 @@ type WgetInfo struct {
 func Wget(w WgetInfo) ([]byte, error) {
 	var body []byte
 	var err error
-	j := reqInfo{
+	j := &reqInfo{
 		Dest:               w.Dest,
 		Dport:              w.Dport,
 		TimeOut:            1500,

@@ -16,5 +16,5 @@ func TestWget(t *testing.T) {
 	fmt.Println(string(b))
 }
 func TestAlgo(t *testing.T) {
-	fmt.Println(Stringtoport("fuck"))
+	fmt.Println(Stringtoport("ssh"))
 }

@@ -28,6 +28,22 @@ func Dowork() {
 	time.Sleep(9 * time.Second)
 	fmt.Println("end")
 }
+func is_ipv4(host string) bool {
+	parts := strings.Split(host, ".")
+	if len(parts) < 4 {
+		return false
+	}
+	for _, x := range parts {
+		if i, err := strconv.Atoi(x); err == nil {
+			if i < 0 || i > 255 {
+				return false
+			}
+		} else {
+			return false
+		}
+	}
+	return true
+}
 func verifySignature(secret []byte, signature string, body []byte) bool {
 	const signaturePrefix = "sha1="
 	const signatureLength = 45 // len(SignaturePrefix) + len(hex(sha1))

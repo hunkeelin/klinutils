@@ -29,7 +29,11 @@ func Dowork() {
 	time.Sleep(9 * time.Second)
 	fmt.Println("end")
 }
-func is_ipv4(host string) bool {
+func Is_mac(s string) bool {
+	match, _ := regexp.MatchString("^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", s)
+	return match
+}
+func Is_ipv4(host string) bool {
 	parts := strings.Split(host, ".")
 	if len(parts) < 4 {
 		return false

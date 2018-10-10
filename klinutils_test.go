@@ -18,3 +18,15 @@ func TestWget(t *testing.T) {
 func TestAlgo(t *testing.T) {
 	fmt.Println(Stringtoport("ssh"))
 }
+func TestGen(t *testing.T) {
+	f, err := Genuuid()
+	if err != nil {
+		panic(err)
+	}
+	d, err := Genmac()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(f))
+	fmt.Println(string(d))
+}

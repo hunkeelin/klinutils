@@ -54,7 +54,7 @@ func Genmac() ([]byte, error) {
 		return []byte(""), err
 	}
 	// Set the local bit
-	buf[0] |= 2
+	buf[0] |= (buf[0] | 2) & 0xfe
 	re, err := captureOutput(func() {
 		fmt.Printf("%02x:%02x:%02x:%02x:%02x:%02x", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5])
 	})

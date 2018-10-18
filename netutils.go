@@ -8,6 +8,7 @@ type WgetInfo struct {
 	Dest  string // Destination aka hostname/ip
 	Dport string // The destination port
 	Route string // the route of the file you try to get
+	Http  bool
 }
 
 func Wget(w WgetInfo) ([]byte, error) {
@@ -20,6 +21,7 @@ func Wget(w WgetInfo) ([]byte, error) {
 		Method:             "GET",
 		Route:              w.Route,
 		InsecureSkipVerify: true,
+		Http:               w.Http,
 	}
 	resp, err := sendPayload(j)
 	if err != nil {

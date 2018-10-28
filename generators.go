@@ -11,6 +11,14 @@ import (
 	"sync"
 )
 
+func Gentoken(i int) string {
+	if i < 4 {
+		i = 4
+	}
+	b := make([]byte, i)
+	rand.Read(b)
+	return fmt.Sprintf("%x", b)
+}
 func Genuuid() ([]byte, error) {
 	out, err := exec.Command("uuidgen").Output()
 	if err != nil {

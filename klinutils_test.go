@@ -5,6 +5,12 @@ import (
 	"testing"
 )
 
+func TestRandint(t *testing.T) {
+	f := RandInt(0, 34)
+	d := RandInt(0, 34)
+	e := RandInt(0, 34)
+	fmt.Println(f, d, e)
+}
 func TestWget(t *testing.T) {
 	fmt.Println("testing wget")
 	w := WgetInfo{

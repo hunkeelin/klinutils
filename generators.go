@@ -6,15 +6,11 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"math/rand"
 	"os"
 	"os/exec"
 	"sync"
 )
 
-func RandInt(min, max int) int {
-	return min + rand.Intn(max-min)
-}
 func Gentoken(i int) string {
 	if i < 4 {
 		i = 4

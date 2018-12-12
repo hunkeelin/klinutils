@@ -3,6 +3,7 @@ package klinutils
 import (
 	"bytes"
 	"crypto/rand"
+	"crypto/sha256"
 	"fmt"
 	"io"
 	"log"
@@ -18,6 +19,14 @@ func Gentoken(i int) string {
 	b := make([]byte, i)
 	rand.Read(b)
 	return fmt.Sprintf("%x", b)
+}
+func Genuuidv2(name string) ([]byte, error) {
+	b, err := Genuuid()
+	if err != nil {
+		return []byte(""), err
+	}
+	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(name)))
+	return []byte(hash[0:8] + string(b)[8:]), nil
 }
 func Genuuid() ([]byte, error) {
 	out, err := exec.Command("uuidgen").Output()

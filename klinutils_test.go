@@ -25,7 +25,7 @@ func TestAlgo(t *testing.T) {
 	fmt.Println(Stringtoport("ssh"))
 }
 func TestGenv2(t *testing.T) {
-	f, err := Genuuidv2("fuck")
+	f, err := Genuuidv2("fuck", 3, 43)
 	if err != nil {
 		panic(err)
 	}

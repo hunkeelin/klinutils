@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strconv"
 	"sync"
 )
 
@@ -21,14 +22,22 @@ func Gentoken(i int) string {
 	rand.Read(b)
 	return fmt.Sprintf("%x", b)
 }
-func Genuuidv2(name string) ([]byte, error) {
+func Genuuidv2(name string, cpu, ram int) ([]byte, error) {
 	b, err := Genuuid()
 	if err != nil {
 		return []byte(""), err
 	}
 	sum := sha256.Sum256([]byte(name))
 	hash := hex.EncodeToString(sum[:])
-	return []byte(hash[0:8] + string(b)[8:]), nil
+	scpu := strconv.Itoa(cpu)
+	sram := strconv.Itoa(ram)
+	if cpu < 10 {
+		scpu = "0" + scpu
+	}
+	if ram < 10 {
+		sram = "0" + sram
+	}
+	return []byte(hash[0:8] + "-" + scpu + sram + string(b)[13:]), nil
 }
 func Genuuid() ([]byte, error) {
 	out, err := exec.Command("uuidgen").Output()

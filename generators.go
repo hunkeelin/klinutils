@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/rand"
 	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"io"
 	"log"
@@ -25,7 +26,8 @@ func Genuuidv2(name string) ([]byte, error) {
 	if err != nil {
 		return []byte(""), err
 	}
-	hash := fmt.Sprintf("%x", sha256.Sum256([]byte(name)))
+	sum := sha256.Sum256([]byte(name))
+	hash := hex.EncodeToString(sum[:])
 	return []byte(hash[0:8] + string(b)[8:]), nil
 }
 func Genuuid() ([]byte, error) {

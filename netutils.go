@@ -17,7 +17,7 @@ func Wget(w WgetInfo) ([]byte, error) {
 	j := &reqInfo{
 		Dest:               w.Dest,
 		Dport:              w.Dport,
-		TimeOut:            1500,
+		TimeOut:            8500,
 		Method:             "GET",
 		Route:              w.Route,
 		InsecureSkipVerify: true,

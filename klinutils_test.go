@@ -11,14 +11,20 @@ func TestRandint(t *testing.T) {
 	e := RandInt(0, 34)
 	fmt.Println(f, d, e)
 }
+func TestPrint(t *testing.T) {
+	fmt.Println(Stringtoport("superca"))
+}
 func TestWget(t *testing.T) {
 	fmt.Println("testing wget")
 	w := WgetInfo{
 		Dest:  "util3.klin-pro.com",
-		Dport: "2018",
+		Dport: "46861",
 		Route: "cacerts/rootca.crt",
 	}
-	b, _ := Wget(w)
+	b, err := Wget(w)
+	if err != nil {
+		panic(err)
+	}
 	fmt.Println(string(b))
 }
 func TestAlgo(t *testing.T) {

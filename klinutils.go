@@ -148,7 +148,6 @@ func GetHostnameFromCertv2(path string) (string, error) {
 
 func Matchstring(s, regex string) bool {
 	match, err := regexp.MatchString(regex, s)
-	fmt.Println("")
 	if err != nil {
 		log.Fatal("regex matching problem")
 	}

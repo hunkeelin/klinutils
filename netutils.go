@@ -1,6 +1,8 @@
 package klinutils
 
 import (
+	"fmt"
+	"io"
 	"io/ioutil"
 )
 
@@ -28,7 +30,10 @@ func Wget(w WgetInfo) ([]byte, error) {
 		return body, err
 	}
 	defer resp.Body.Close()
-	body, err = ioutil.ReadAll(resp.Body)
+	lr := io.LimitReader(resp.Body, 65532)
+
+	body, err = ioutil.ReadAll(lr)
+	fmt.Println("length of body", len(body))
 	if err != nil {
 		return body, err
 	}

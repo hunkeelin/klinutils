@@ -1,7 +1,6 @@
 package klinutils
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 )

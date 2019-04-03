@@ -33,7 +33,6 @@ func Wget(w WgetInfo) ([]byte, error) {
 	lr := io.LimitReader(resp.Body, 65532)
 
 	body, err = ioutil.ReadAll(lr)
-	fmt.Println("length of body", len(body))
 	if err != nil {
 		return body, err
 	}

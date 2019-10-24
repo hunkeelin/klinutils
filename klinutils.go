@@ -33,6 +33,36 @@ func Is_mac(s string) bool {
 	match, _ := regexp.MatchString("^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$", s)
 	return match
 }
+
+func ThreadRunner(n int) chan func() {
+	fc := make(chan func())
+	for i := 0; i < n; i++ {
+		go func() {
+			for {
+				f := <-fc
+				f()
+			}
+		}()
+	}
+	return fc
+}
+
+// Example
+/*
+func contest() {
+    f := runner(5)
+    var wg sync.WaitGroup
+    for i := 0; i < 15; i++ {
+        wg.Add(1)
+        j := i
+        f <- func() {
+            Dowork()
+            wg.Done()
+        }
+    }
+    wg.Wait()
+}
+*/
 func Is_ipv4(host string) bool {
 	parts := strings.Split(host, ".")
 	if len(parts) < 4 {

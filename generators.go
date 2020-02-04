@@ -14,6 +14,7 @@ import (
 	"sync"
 )
 
+// This function generates a token
 func Gentoken(i int) string {
 	if i < 4 {
 		i = 4
